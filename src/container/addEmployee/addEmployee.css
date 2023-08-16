@@ -1,0 +1,48 @@
+.addemployee {
+    padding-top: 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.addemployee-content {
+    display: flex;
+    flex-direction: column;
+    margin: 2rem 0rem;
+}
+
+.addemployee-content input {
+    width: 300px;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+}
+
+.combobox {
+    margin-bottom: 1rem;
+    width: 300px;
+}
+
+.combobox TextField {
+    height: 200px;
+}
+
+.addemployee-content-img {
+    cursor: pointer;
+}
+
+.imgPicture {
+    margin-bottom: 1rem;
+}
+
+.imgPicture img {
+    width: 150px;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.Ridepete {
+    color: rgb(159, 124, 124);
+    cursor: pointer;
+}

@@ -1,0 +1,17 @@
+.gradient__bg {
+    background-color: rgb(193, 234, 237);
+    margin-top: 0;
+    padding-top: 0;
+    position: relative;
+}
+
+.gradient__text {
+    background: var(--gradient-text);
+    background-clip: text;
+    -webkit-background-clop: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.app {
+    background-color: rgb(244, 235, 216);
+}

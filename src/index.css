@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap");
+
+:root {
+    --font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --gradient-textare: linear-gradient(90deg, rgba(228, 255, 229, 1) 0%, rgba(209, 235, 240, 1) 100%);
+    --gradient-text: radial-gradient(circle at 50% 50%, rgba(217, 96, 21, 1) 0%, rgba(180, 48, 74, 1) 100%);
+    --gradient-bg: linear-gradient(90deg, rgba(104, 123, 61, 1) 0%, rgba(210, 114, 82, 1) 100%);
+    --primary-color: #edf2f8;
+    --secondary-color: #313bac;
+    --black-color: #030303;
+    --lightGray-color: #e4e4e4;
+    --gray-color: #6b7688;
+    --brown-color: #46364a;
+    --white-color: #ffffff;
+    --color-bg: rgba(231, 250, 250, 1);
+    --color-p: rgb(53, 40, 40);
+    --liner-color: linear-gradient(90deg, rgba(164, 76, 255, 1) 0%, rgba(26, 255, 237, 1) 100%);
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+    scroll-behavior: smooth;
+}
