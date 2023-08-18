@@ -1,3 +1,10 @@
 .listemployee {
     padding: 2rem 4rem;
 }
+
+.listemployee-content {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    grid-gap: 2rem;
+}

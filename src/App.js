@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import { Header, Navbar } from './components';
 import { AddEmployee, EditEmployee, ListEmployee } from './container';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './components/reduxApp/store';
 const App = () => {
@@ -10,7 +10,6 @@ const App = () => {
         <>
             <BrowserRouter>
                 <Provider store={store}>
-
                     <div className='app'>
                         <Navbar />
                         <Routes>
@@ -23,7 +22,7 @@ const App = () => {
                             <Route path="/employeeList" element={<ListEmployee />} />
                             <Route path="/addEmployee" element={<AddEmployee />} />
 
-                            <Route path="/editEmployee" element={<EditEmployee />} />
+                            <Route path="/editEmployee/:id" element={<EditEmployee />} />
                         </Routes>
                     </div>
                 </Provider>

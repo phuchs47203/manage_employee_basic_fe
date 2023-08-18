@@ -1,12 +1,14 @@
 import React, { useRef, useState } from 'react'
 import './addEmployee.css';
 import TextField from '@mui/material/TextField';
-import Autocomplete from '@mui/lab/Autocomplete';
+// import Autocomplete from '@mui/lab/Autocomplete';
+import Autocomplete from '@mui/material/Autocomplete';
 import { IoMdPhotos } from "react-icons/io";
 import { RiDeleteBin6Line } from 'react-icons/ri';
 import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../../components/features/employeeSlice';
+import { useNavigate } from 'react-router-dom';
 
 
 const AddEmployee = () => {
@@ -19,9 +21,6 @@ const AddEmployee = () => {
     const [employee, setEmployee] = useState({
         fullName: "",
         email: "",
-        department: "",
-        position: "",
-        address: "",
     })
     const [imageProfile, setimageProfile] = useState(null);
     const removeImage = () => {
@@ -47,18 +46,39 @@ const AddEmployee = () => {
         const value = e.target.value;
         setEmployee({ ...employee, [e.target.name]: value });
     };
+    const [errorFullName, seterrorFullName] = useState("");
+    const navigate = useNavigate();
     const saveEmployee = (e) => {
         e.preventDefault();
+        if (!textAddress) {
+            seterrorFullName("fullName is not empty");
+            return;
+        }
+        if (!textDepartment) {
+            seterrorFullName("not empty");
+            return;
+        }
+        if (!textPosition) {
+            seterrorFullName("not empty");
+            return;
+        }
+        if (!employee.fullName) {
+            seterrorFullName("notempty");
+        }
+        seterrorFullName("");
         const formData = new FormData();
 
-        console.log(employee.fullName);
-        console.log(employee.email);
+        // console.log(employee.fullName);
+        // console.log(employee.email);
+        // console.log(employee.department);
+        // console.log(employee.address);
+        // console.log(employee.position);
 
         formData.append("fullName", employee.fullName);
         formData.append("email", employee.email);
-        formData.append("department", "department");
-        formData.append("position", "position");
-        formData.append("address", "address");
+        formData.append("department", textDepartment);
+        formData.append("position", textPosition);
+        formData.append("address", textAddress);
         formData.append("file", imageProfile);
         axios
             .post(EMPLOYEE_MANAGEMENT, formData, {
@@ -74,6 +94,10 @@ const AddEmployee = () => {
                 console.log(error);
             });
     };
+    const [textAddress, settextAddress] = useState("");
+    const [textDepartment, settextDepartment] = useState("");
+    const [textPosition, settextPosition] = useState("");
+
     return (
         <div div className='addemployee' >
             <div className='addemployee-header'>
@@ -87,6 +111,11 @@ const AddEmployee = () => {
                     type="text"
                     placeholder='Full Name'
                 />
+                {errorFullName &&
+                    <p>
+                        {errorFullName}
+                    </p>
+                }
                 <input
                     name='email'
                     value={employee.email}
@@ -96,9 +125,10 @@ const AddEmployee = () => {
                 />
                 <Autocomplete
                     className='combobox'
-                    name="department"
-                    value={employee.department}
-                    onChange={(e) => handleChange(e)}
+                    name='department'
+                    includeInputInList
+                    value={textDepartment}
+                    onChange={(e, value) => settextDepartment(value)}
                     options={optionsDepartment}
                     renderInput={(params) =>
                         <TextField {...params} label="Department" variant="standard" />}
@@ -106,8 +136,8 @@ const AddEmployee = () => {
                 <Autocomplete
                     className='combobox'
                     name="position"
-                    value={employee.position}
-                    onChange={(e) => handleChange(e)}
+                    value={textPosition}
+                    onChange={(e, value) => settextPosition(value)}
                     options={optionsPosition}
                     renderInput={(params) =>
                         <TextField {...params} label="Position" variant="standard" />}
@@ -115,12 +145,13 @@ const AddEmployee = () => {
                 <Autocomplete
                     className='combobox'
                     name="address"
-                    value={employee.address}
-                    onChange={(e) => handleChange(e)}
+                    value={textAddress}
+                    onChange={(e, value) => settextAddress(value)}
                     options={optionsAddress}
                     renderInput={(params) =>
                         <TextField {...params} label="Address" variant="standard" />}
                 />
+
                 {imageProfile && (
                     <div
 
@@ -150,7 +181,14 @@ const AddEmployee = () => {
                 >
                     Save
                 </button>
-                <button>Clear</button>
+                <button>
+                    Clear
+                </button>
+                <button
+                    onClick={() => navigate("/")}
+                >
+                    Cancle
+                </button>
             </div>
         </div >
     )

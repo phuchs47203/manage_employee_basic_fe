@@ -4,11 +4,17 @@ import { useNavigate } from 'react-router-dom';
 const Narbar = () => {
     const navigate = useNavigate();
     return (
-        <div
-            onClick={() => navigate("/")}
-            className='navbar'>
-            <h1 className='gradient__text'>Employee Management</h1>
-        </div>
+        // <div
+        //     onClick={() => navigate("/")}
+        //     className='navbar'>
+        //     <h1 className='gradient__text'>Employee Management</h1>
+        // </div>
+        <a href="/">
+            <div
+                className='navbar'>
+                <h1 className='gradient__text'>Employee Management</h1>
+            </div>
+        </a>
     )
 }
 
