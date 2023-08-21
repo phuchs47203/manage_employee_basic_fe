@@ -9,7 +9,7 @@ import axios from 'axios';
 import { useDispatch } from 'react-redux';
 import { addEmployee } from '../../components/features/employeeSlice';
 import { useNavigate } from 'react-router-dom';
-
+import { motion } from 'framer-motion';
 
 const AddEmployee = () => {
     const EMPLOYEE_MANAGEMENT = "http://localhost:8080/api/v1/employee";
@@ -18,10 +18,7 @@ const AddEmployee = () => {
     const optionsDepartment = ['Human Resources', 'Marketing', 'Technical Support Team', 'IT', 'Logistics', 'Sales', 'Customer Service', 'Finance '];
     const optionsPosition = ['Manager', 'Administrator', 'Data Analyst', 'Business Analyst', 'Recruiter', 'Assistant', 'Secretary', 'Rep'];
 
-    const [employee, setEmployee] = useState({
-        fullName: "",
-        email: "",
-    })
+
     const [imageProfile, setimageProfile] = useState(null);
     const removeImage = () => {
         setimageProfile(null);
@@ -41,41 +38,46 @@ const AddEmployee = () => {
                 setimageProfile(e.target.result);
             };
         }
+        seterrorImage("");
     };
-    const handleChange = (e) => {
+    const handleChangeName = (e) => {
         const value = e.target.value;
-        setEmployee({ ...employee, [e.target.name]: value });
+        seterroreNameempty("");
+        settextName(value);
+        if (textName.length < 61) {
+            seterroreNamelength("");
+        }
+        else {
+            seterroreNamelength("Length of full name is not greater than 60 cahracters !");
+            return;
+        }
+
     };
-    const [errorFullName, seterrorFullName] = useState("");
+    const handleChangeEmail = (e) => {
+        const value = e.target.value;
+        seterroreEmailempty("");
+        settextEmail(value);
+        if (textEmail.length < 66) {
+            seterroreEmaillength("");
+        }
+        else {
+            seterroreEmaillength("Length of email address is not greater than 65 cahracters !");
+            return;
+        }
+    };
+    const ClearInfor = () => {
+        settextAddress("");
+        settextDepartment("");
+        settextPosition("");
+        settextEmail("");
+        settextName("");
+        removeImage();
+    }
     const navigate = useNavigate();
-    const saveEmployee = (e) => {
-        e.preventDefault();
-        if (!textAddress) {
-            seterrorFullName("fullName is not empty");
-            return;
-        }
-        if (!textDepartment) {
-            seterrorFullName("not empty");
-            return;
-        }
-        if (!textPosition) {
-            seterrorFullName("not empty");
-            return;
-        }
-        if (!employee.fullName) {
-            seterrorFullName("notempty");
-        }
-        seterrorFullName("");
+    const saveEmployee = () => {
         const formData = new FormData();
-
-        // console.log(employee.fullName);
-        // console.log(employee.email);
-        // console.log(employee.department);
-        // console.log(employee.address);
-        // console.log(employee.position);
-
-        formData.append("fullName", employee.fullName);
-        formData.append("email", employee.email);
+        formData.append("fullName", textName);
+        formData.append("email", textEmail);
         formData.append("department", textDepartment);
         formData.append("position", textPosition);
         formData.append("address", textAddress);
@@ -87,70 +89,151 @@ const AddEmployee = () => {
             .then((response) => {
                 inputRef.current.value = "";
                 dispatch(addEmployee(response.data));
-                console.log(response.data);
-                removeImage();
             })
             .catch((error) => {
                 console.log(error);
             });
+        ClearInfor();
+        // refresh();
+        annouceSucess();
+        // setftoggleSuccesFull(true);
     };
     const [textAddress, settextAddress] = useState("");
     const [textDepartment, settextDepartment] = useState("");
     const [textPosition, settextPosition] = useState("");
+    const [textName, settextName] = useState("");
+    const [textEmail, settextEmail] = useState("");
 
+    const [errorEmaillength, seterroreEmaillength] = useState("");
+    const [errorEmailempty, seterroreEmailempty] = useState("");
+    const [errorNamelength, seterroreNamelength] = useState("");
+    const [errorNameempty, seterroreNameempty] = useState("");
+    const [errorDeparmetnempty, seterroreDepartmentempty] = useState("");
+    const [errorPosiotionempty, seterrorePositionempty] = useState("");
+    const [errorAddressempty, seterroreAddressempty] = useState("");
+    const [errorImage, seterrorImage] = useState("");
+
+    const [toggleSuccesFull, setftoggleSuccesFull] = useState(false);
+    const CheckErrorContent = () => {
+        if (!textName) {
+            seterroreNameempty("Full name is not empty !");
+            return;
+        }
+        seterroreNameempty("");
+        if (!textEmail) {
+            seterroreEmailempty("Email address is not empty !");
+            return;
+        }
+        seterroreEmailempty("");
+        if (!textDepartment) {
+            seterroreDepartmentempty("Department is not empty !");
+            return;
+        }
+        if (!textPosition) {
+            seterrorePositionempty("Position is not empty !");
+            return;
+        }
+        seterrorePositionempty("");
+        if (!textAddress) {
+            seterroreAddressempty("Address is not empty !");
+            return;
+        }
+        seterroreAddressempty("");
+        if (!imageProfile) {
+            seterrorImage("Profile picture is not empty !");
+            return;
+        }
+        seterrorImage("");
+        saveEmployee();
+        // setftoggleSuccesFull(true);
+    }
+    const setErrorDepartmentOriginal = (e, value) => {
+        seterroreDepartmentempty("");
+        settextDepartment(value);
+    }
+    const setErrorPositionOriginal = (e, value) => {
+        seterrorePositionempty("");
+        settextPosition(value);
+    }
+    const setErrorAddressOriginal = (e, value) => {
+        seterroreAddressempty("");
+        settextAddress(value);
+    }
+    const refresh = () => window.location.reload(false);
+
+    const ExitPage = () => {
+
+        navigate("/");
+        // window.location.reload();
+        refresh();
+        // navigate(0);
+    }
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+
+    const annouceSucess = async () => {
+        setftoggleSuccesFull(true);
+        await delay(1600);
+        setftoggleSuccesFull(false);
+
+    }
     return (
         <div div className='addemployee' >
             <div className='addemployee-header'>
-                <h1>enter information</h1>
+                <h1>Enter Information</h1>
             </div>
             <div className='addemployee-content'>
                 <input
                     name="fullName"
-                    value={employee.fullName}
-                    onChange={(e) => handleChange(e)}
+                    value={textName}
+                    onChange={(e) => handleChangeName(e)}
                     type="text"
                     placeholder='Full Name'
                 />
-                {errorFullName &&
-                    <p>
-                        {errorFullName}
-                    </p>
-                }
+                {errorNameempty && <p className='errortext_add'>{errorNameempty}</p>}
+                {errorNamelength && <p className='errortext_add'>{errorNamelength}</p>}
+
                 <input
                     name='email'
-                    value={employee.email}
-                    onChange={(e) => handleChange(e)}
+                    value={textEmail}
+                    onChange={(e) => handleChangeEmail(e)}
                     type="email"
                     placeholder='Email Address'
                 />
+                {errorEmailempty && <p className='errortext_add'>{errorEmailempty}</p>}
+                {errorEmaillength && <p className='errortext_add'>{errorEmaillength}</p>}
+
                 <Autocomplete
                     className='combobox'
                     name='department'
                     includeInputInList
                     value={textDepartment}
-                    onChange={(e, value) => settextDepartment(value)}
+                    onChange={(e, value) => setErrorDepartmentOriginal(e, value)}
                     options={optionsDepartment}
                     renderInput={(params) =>
                         <TextField {...params} label="Department" variant="standard" />}
                 />
+                {errorDeparmetnempty && <p className='errortext_add'>{errorDeparmetnempty}</p>}
                 <Autocomplete
                     className='combobox'
                     name="position"
                     value={textPosition}
-                    onChange={(e, value) => settextPosition(value)}
+                    onChange={(e, value) => setErrorPositionOriginal(e, value)}
                     options={optionsPosition}
                     renderInput={(params) =>
                         <TextField {...params} label="Position" variant="standard" />}
                 />
+                {errorPosiotionempty && <p className='errortext_add'>{errorPosiotionempty}</p>}
                 <Autocomplete
                     className='combobox'
                     name="address"
                     value={textAddress}
-                    onChange={(e, value) => settextAddress(value)}
+                    onChange={(e, value) => setErrorAddressOriginal(e, value)}
                     options={optionsAddress}
                     renderInput={(params) =>
                         <TextField {...params} label="Address" variant="standard" />}
                 />
+                {errorAddressempty && <p className='errortext_add'>{errorAddressempty}</p>}
+
 
                 {imageProfile && (
                     <div
@@ -174,22 +257,50 @@ const AddEmployee = () => {
                         hidden
                     />
                 </div>
+                {errorImage && <p className='errortext_add'>{errorImage}</p>}
+
             </div>
             <div className='addemployee-btn'>
                 <button
-                    onClick={saveEmployee}
+                    onClick={() => CheckErrorContent()}
                 >
                     Save
                 </button>
-                <button>
+                <button
+                    onClick={ClearInfor}
+                >
                     Clear
                 </button>
                 <button
-                    onClick={() => navigate("/")}
+                    onClick={() => ExitPage()}
                 >
-                    Cancle
+                    Exit
                 </button>
             </div>
+            {toggleSuccesFull && (
+                <motion.div
+                    initial={{ opacity: 0, x: 0 }}
+                    animate={{ opacity: toggleSuccesFull ? 1 : 0, x: 0 }}
+                    // transition={{ duration: 0.3 }}
+                    className='annouce_toggle_content_add'
+                >
+                    <div className='annouce_toggle_content_div_add'>
+                        <p>Successfully</p>
+                        {/* <div className='annouce_toggle_content-btn'>
+                            <button
+                                onClick={() => setftoggleSuccesFull(false)}
+                            >
+                                Stay
+                            </button>
+                            <button
+                                onClick={() => ExitPage()}
+                            >
+                                Leave
+                            </button>
+                        </div> */}
+                    </div>
+                </motion.div>
+            )}
         </div >
     )
 }

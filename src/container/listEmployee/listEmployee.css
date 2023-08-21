@@ -1,10 +1,82 @@
 .listemployee {
-    padding: 2rem 4rem;
+    padding: 6rem 3rem;
+    min-height: 100vh;
+    height: 100%;
+    top: 0;
+    bottom: 0;
 }
 
 .listemployee-content {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    grid-gap: 2rem;
+    grid-gap: 1rem;
+    justify-content: center;
+}
+
+.listemployee-header {
+    margin-bottom: 1rem;
+    justify-content: center;
+    display: flex;
+    margin-top: 2rem;
+}
+
+.listemployee-header h1 {
+    font-family: var(--font-family);
+    font-size: 38px;
+    font-weight: 600;
+    line-height: 50px;
+    color: rgb(239, 122, 143);
+    word-break: break-all;
+}
+
+.listemployee-btn {
+    margin-bottom: 3rem;
+    margin-top: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+
+    /* &:hover {
+        color: rgb(70, 186, 159);
+    } */
+}
+
+.listemployee-btn button {
+    padding: 0.5rem 1rem;
+    transition: all 0.3 ease;
+    cursor: pointer;
+    border-radius: 0.7rem;
+    font-family: var(--font-family);
+    font-size: 18px;
+    color: rgb(102, 105, 240);
+    font-weight: 500;
+    background-color: rgb(215, 238, 207);
+    border: 1px solid black;
+
+    &:hover {
+        color: rgb(220, 117, 158);
+    }
+}
+
+@media screen and (max-width: 850px) {
+    .listemployee {
+        padding: 6rem 0.5rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .listemployee {
+        padding: 3rem 0.5rem;
+    }
+
+    .listemployee-header h1 {
+        font-size: 22px;
+        line-height: 28px;
+    }
+
+    .listemployee-btn button {
+        font-size: 14px;
+        line-height: 20px;
+    }
 }

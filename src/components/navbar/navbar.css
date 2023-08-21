@@ -6,12 +6,46 @@
     display: flex;
     position: fixed;
     cursor: pointer;
+    height: fit-content;
+    overflow-wrap: break-word;
 }
 
 .navbar h1 {
     font-family: var(--font-family);
-    font-size: 40px;
+    font-size: 46px;
     line-height: 50px;
-    padding: 0.5rem 0;
-    font-weight: 500;
+    padding: 1rem;
+    font-weight: 650;
+    letter-spacing: 0.04rem;
+    word-break: break-all;
+    margin: 0 0.5rem;
+}
+
+.link-navbar {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 900px) {
+    .navbar h1 {
+        font-size: 30px;
+        line-height: 40px;
+        padding: 0.5rem 0;
+        font-weight: 500;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .navbar h1 {
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 600;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .navbar {
+        position: relative;
+    }
+
+
 }

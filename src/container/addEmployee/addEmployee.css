@@ -1,30 +1,44 @@
 .addemployee {
-    padding-top: 5rem;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    height: 100vh;
+
+}
+
+.addemployee-header {
+    display: flex;
+}
+
+.addemployee-header h1 {
+    font-family: var(--font-family);
+    font-size: 38px;
+    line-height: 60px;
+    color: rgb(184, 97, 97);
+    font-weight: 600;
 }
 
 .addemployee-content {
     display: flex;
     flex-direction: column;
     margin: 2rem 0rem;
+    grid-gap: 1rem;
 }
 
 .addemployee-content input {
-    width: 300px;
+    width: 500px;
     padding: 0.5rem 1rem;
     margin-bottom: 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    padding: 0.8rem 0.5rem;
+    font-size: 16px;
 }
 
 .combobox {
     margin-bottom: 1rem;
-    width: 300px;
-}
-
-.combobox TextField {
-    height: 200px;
+    width: 500px;
 }
 
 .addemployee-content-img {
@@ -42,7 +56,141 @@
     flex-direction: row;
 }
 
+.addemployee-btn {
+    display: flex;
+    flex-direction: row;
+    grid-gap: 2rem;
+}
+
+.addemployee-btn button {
+    padding: 0.5rem 1rem;
+    font-family: var(--font-family);
+    font-size: 18px;
+    border-radius: 1rem;
+    font-weight: 500;
+    color: rgb(171, 149, 122);
+    background-color: rgb(206, 232, 226);
+    /* border: 1.5px solid black; */
+}
+
 .Ridepete {
     color: rgb(159, 124, 124);
     cursor: pointer;
+}
+
+.errortext_add {
+    font-family: var(--font-family);
+    font-size: 15px;
+    line-height: 20px;
+    margin-bottom: 1rem;
+
+    color: red;
+}
+
+.annouce_toggle_content_add {
+    background-color: rgba(217, 243, 233, 0.8);
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+
+    transition: all 0.3s ease-in-out;
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+}
+
+/* .annouce_toggle_content_add::backdrop {
+    transition: all 0.3s ease-in-out;
+
+} */
+
+
+
+.annouce_toggle_content_div_add {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    height: fit-content;
+    width: 500px;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0.5rem;
+    border-radius: 1rem;
+    /* background-color: rgb(148, 214, 210); */
+    display: flex;
+    flex-direction: column;
+    background: var(--gradient-bg);
+}
+
+.annouce_toggle_content_div_add p {
+    font-family: var(--font-family);
+    font-size: 24px;
+    line-height: 40px;
+    color: rgb(168, 72, 110);
+    font-weight: 500;
+    text-align: center;
+    margin-bottom: 0.5rem;
+}
+
+@media screen and (max-width: 900px) {
+    .addemployee-content input {
+        width: 400px;
+    }
+
+    .combobox {
+        width: 400px;
+    }
+
+    .annouce_toggle_content_div_add {
+        width: 400px;
+    }
+}
+
+@media screen and (max-height: 700px) {
+    .addemployee {
+        padding-top: 2rem;
+    }
+
+    .addemployee-content {
+        grid-gap: 0.5rem;
+    }
+
+    .addemployee-btn {
+        grid-gap: 1rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .addemployee-header h1 {
+        font-size: 24px;
+        line-height: 32px;
+    }
+
+    .addemployee-content input {
+        width: 300px;
+        font-size: 14px;
+    }
+
+    .addemployee-btn button {
+        font-size: 14px;
+        padding: 0.2rem 1rem;
+    }
+
+    .combobox {
+        width: 300px;
+        height: 50px;
+    }
+
+    .annouce_toggle_content_div_add {
+        width: 300px;
+    }
+
+    .addemployee-content {
+        margin-bottom: 0.5rem;
+    }
 }

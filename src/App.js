@@ -5,17 +5,19 @@ import { AddEmployee, EditEmployee, ListEmployee } from './container';
 import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './components/reduxApp/store';
+
 const App = () => {
+
     return (
         <>
             <BrowserRouter>
                 <Provider store={store}>
                     <div className='app'>
                         <Navbar />
-                        <Routes>
+                        {/* <Routes>
                             <Route index element={<Header />} />
                             <Route path='/' element={<Header />} > </Route>
-                        </Routes>
+                        </Routes> */}
                         <Routes>
                             <Route index element={<ListEmployee />} />
                             <Route path='/' element={<ListEmployee />}> </Route>
